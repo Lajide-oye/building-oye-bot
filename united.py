@@ -1,21 +1,34 @@
-import random
-from datetime import date
+
+import requests
+import os
 
 def get_united_tweet():
-    today = date.today()
-    formatted_date = today.strftime("%B %d")
+    api_key = os.getenv("NEWS_API_KEY")
+    if not api_key:
+        return "⚠️ NEWS_API_KEY not found in environment variables."
 
-    tweets = [
-        f"🔴 United 🔁 training mode: All eyes on the weekend! #MUFC #GloryGloryManUnited",
-        f"📅 On this day, {formatted_date} — Ronaldo’s iconic header vs Chelsea (2008). 🏆 #OTD #MUFC",
-        f"💬 Ten Hag has plans cooking — tactical shake-up brewing for Old Trafford! 🔁⚽",
-        f"🚨 Transfer whispers around United... Something brewing? 👀 #MUFC #Transfers",
-        f"🎯 Rashford. Garnacho. Bruno. Who's YOUR player to watch this weekend? #ManUtd",
-        f"📸 Scenes from Carrington today. Energy levels: 🔥🔥🔥 #TrainingDay #MUFC",
-        f"🔙 Flashback: On this day {formatted_date}, Rooney scored a hat-trick in his debut! 🔥🔥🔥 #Legend",
-        f"📣 Matchday loading… United vs Arsenal 🔜. Predictions? #MUFC #Matchday",
-        f"🎉 Happy Birthday to United legend Ryan Giggs! 🐐 #MUFCHistory",
-        f"📊 United unbeaten at home in the last 10 games. Fortress Old Trafford 🏟️ #RedStats"
-    ]
+    url = (
+        "https://newsapi.org/v2/everything?"
+        "q=manchester united&"
+        "sortBy=publishedAt&"
+        "language=en&"
+        "pageSize=1&"
+        f"apiKey={api_key}"
+    )
 
-    return random.choice(tweets)
+    try:
+        response = requests.get(url)
+        data = response.json()
+
+        if data.get("status") != "ok" or not data.get("articles"):
+            return "❌ Couldn't fetch United news at the moment."
+
+        article = data["articles"][0]
+        title = article.get("title", "No title available")
+        url = article.get("url", "")
+
+        tweet = f"🚨 {title}\n🔗 Read more: {url}\n#MUFC #ManUtd"
+        return tweet
+
+    except Exception as e:
+        return f"❌ Error fetching United news: {str(e)}"
