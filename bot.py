@@ -5,6 +5,8 @@ from dotenv import load_dotenv
 import os
 
 load_dotenv()
+# print("DEBUG: NEWS_API_KEY =", os.getenv("NEWS_API_KEY"))
+
 from typing import List
 
 from stock_news import get_stock_news_tweet
