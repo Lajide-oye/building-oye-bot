@@ -1,0 +1,33 @@
+import requests
+import os
+
+def get_stock_news_tweet():
+    api_key = os.getenv("NEWS_API_KEY")
+    if not api_key:
+        return "⚠️ NEWS_API_KEY not found in environment variables."
+
+    url = (
+        "https://newsapi.org/v2/everything?"
+        "q=stock market&"
+        "sortBy=publishedAt&"
+        "language=en&"
+        "pageSize=1&"
+        f"apiKey={api_key}"
+    )
+
+    try:
+        response = requests.get(url)
+        data = response.json()
+
+        if data.get("status") != "ok" or not data.get("articles"):
+            return "❌ Couldn't fetch stock market news at the moment."
+
+        article = data["articles"][0]
+        title = article.get("title", "No title available")
+        url = article.get("url", "")
+
+        tweet = f"📈 Stock Market Update:\n{title}\n🔗 Read more: {url}\n#StockMarket #Investing"
+        return tweet
+
+    except Exception as e:
+        return f"❌ Error fetching stock market news: {str(e)}"
