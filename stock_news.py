@@ -1,6 +1,6 @@
 import requests
 
-NEWS_API_KEY = "771804bb7ee84318b575c41aa53ef3c5" 
+api_key= "771804bb7ee84318b575c41aa53ef3c5"
 
 import os
 
