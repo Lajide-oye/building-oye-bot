@@ -1,8 +1,9 @@
 import requests
 import os
 
-def get_stock_news_tweet():
-    api_key = os.getenv("NEWS_API_KEY")
+def get_stock_tweet(ticker):
+    return f"{ticker} stock is doing great!"
+api_key = os.getenv("NEWS_API_KEY")
     if not api_key:
         return "⚠️ NEWS_API_KEY not found in environment variables."
 
