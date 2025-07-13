@@ -1,7 +1,5 @@
 import requests
 
-api_key= "771804bb7ee84318b575c41aa53ef3c5"
-
 import os
 
 def get_stock_news_tweet(ticker: str) -> str:
