@@ -1,4 +1,7 @@
 import requests
+
+NEWS_API_KEY = "771804bb7ee84318b575c41aa53ef3c5" 
+
 import os
 
 def get_stock_news_tweet(ticker: str) -> str:
@@ -22,7 +25,7 @@ def get_stock_news_tweet(ticker: str) -> str:
         "sortBy=publishedAt&"
         "language=en&"
         "pageSize=1&"
-        f"apiKey={771804bb7ee84318b575c41aa53ef3c5}"
+        f"apiKey={api_key}"
     )
 
     try:
