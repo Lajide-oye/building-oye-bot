@@ -1,8 +1,8 @@
-name: Daily Twitter Bot
+name: Run Bot Every 3 Hours
 
 on:
   schedule:
-    - cron: "0 8 * * *"  # Runs daily at 9AM WAT
+    - cron: "0 */3 * * *"  # Runs every 3 hours
   workflow_dispatch:
 
 jobs:
