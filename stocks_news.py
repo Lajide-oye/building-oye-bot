@@ -1,9 +1,18 @@
 import requests
 import os
 
-def get_stock_tweet(ticker):
-    return f"{ticker} stock is doing great!"
-api_key = os.getenv("NEWS_API_KEY")
+def get_stock_news_tweet(ticker: str) -> str:
+    """
+    Fetches the latest stock market news and formats it as a tweet.
+    Falls back to a generic message if API key is missing or news can't be fetched.
+
+    Args:
+        ticker (str): Stock ticker symbol.
+
+    Returns:
+        str: Tweet text.
+    """
+    api_key = os.getenv("NEWS_API_KEY")
     if not api_key:
         return "⚠️ NEWS_API_KEY not found in environment variables."
 
@@ -17,7 +26,7 @@ api_key = os.getenv("NEWS_API_KEY")
     )
 
     try:
-        response = requests.get(url)
+        response = requests.get(url, timeout=10)
         data = response.json()
 
         if data.get("status") != "ok" or not data.get("articles"):
@@ -25,9 +34,12 @@ api_key = os.getenv("NEWS_API_KEY")
 
         article = data["articles"][0]
         title = article.get("title", "No title available")
-        url = article.get("url", "")
+        article_url = article.get("url", "")
 
-        tweet = f"📈 Stock Market Update:\n{title}\n🔗 Read more: {url}\n#StockMarket #Investing"
+        tweet = (
+            f"📈 Stock Market Update:\n{title}\n"
+            f"🔗 Read more: {article_url}\n#StockMarket #Investing"
+        )
         return tweet
 
     except Exception as e:
