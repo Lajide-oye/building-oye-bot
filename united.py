@@ -6,11 +6,7 @@ load_dotenv()
 
 def get_united_tweet() -> str:
     """
-    Fetches the latest Manchester United news and formats it as a tweet.
-    Falls back to a generic message if API key is missing or news can't be fetched.
-
-    Returns:
-        str: Tweet text.
+    Fetches the latest Manchester United news.
     """
     api_key = os.getenv("NEWS_API_KEY")
     if not api_key:
@@ -18,7 +14,7 @@ def get_united_tweet() -> str:
 
     url = (
         "https://newsapi.org/v2/everything?"
-        "q=manchester united&"
+        "q=\"manchester united\"&"
         "sortBy=publishedAt&"
         "language=en&"
         "pageSize=1&"

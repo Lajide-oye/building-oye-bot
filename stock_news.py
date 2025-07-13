@@ -2,17 +2,19 @@ import requests
 import os
 from dotenv import load_dotenv
 
-load_dotenv()  # ✅ This loads the .env file
+load_dotenv()
 
 def get_stock_news_tweet(ticker: str) -> str:
+    """
+    Fetches the latest relevant business news for the stock market.
+    """
     api_key = os.getenv("NEWS_API_KEY")
     if not api_key:
         return "⚠️ NEWS_API_KEY not found in environment variables."
 
     url = (
-        "https://newsapi.org/v2/everything?"
-        "q=stock market&"
-        "sortBy=publishedAt&"
+        "https://newsapi.org/v2/top-headlines?"
+        "category=business&"
         "language=en&"
         "pageSize=1&"
         f"apiKey={api_key}"
