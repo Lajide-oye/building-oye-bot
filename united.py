@@ -13,7 +13,7 @@ def get_united_tweet():
         "sortBy=publishedAt&"
         "language=en&"
         "pageSize=1&"
-        f"apiKey={api_key}"
+        f"apiKey={771804bb7ee84318b575c41aa53ef3c5}"
     )
 
     try:
