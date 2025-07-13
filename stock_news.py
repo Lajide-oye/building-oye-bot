@@ -1,18 +1,10 @@
 import requests
-
 import os
+from dotenv import load_dotenv
+
+load_dotenv()  # ✅ This loads the .env file
 
 def get_stock_news_tweet(ticker: str) -> str:
-    """
-    Fetches the latest stock market news and formats it as a tweet.
-    Falls back to a generic message if API key is missing or news can't be fetched.
-
-    Args:
-        ticker (str): Stock ticker symbol.
-
-    Returns:
-        str: Tweet text.
-    """
     api_key = os.getenv("NEWS_API_KEY")
     if not api_key:
         return "⚠️ NEWS_API_KEY not found in environment variables."

@@ -1,6 +1,10 @@
 """Bot for tweeting stock and united news."""
 
 import random
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 from typing import List
 
 from stock_news import get_stock_news_tweet
