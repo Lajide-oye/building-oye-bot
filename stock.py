@@ -33,6 +33,6 @@ def get_stock_tweet():
     return (
         f"{direction} ${ticker.upper()} closed at ${close_price:.2f} "
         f"({pct_change:+.2f}%) on {date.today():%b %d, %Y}. "
-        "#Stocks #Finance #MarketNews"
+    
     )
 

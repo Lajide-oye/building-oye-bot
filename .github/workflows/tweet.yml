@@ -1,4 +1,5 @@
-name: Run Bot Every 3 Hours
+name: Tweet Bot Workflow
+# This workflow runs a Twitter bot that tweets stock and Manchester United news.
 
 on:
   schedule:

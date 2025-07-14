@@ -1,4 +1,4 @@
 
 def tweet(message):
-    print("🚀 This is what would be tweeted:")
+    print("🚀 See tweet below:")
     print(message)

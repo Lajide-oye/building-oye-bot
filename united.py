@@ -6,7 +6,7 @@ load_dotenv()
 
 def get_united_tweet() -> str:
     """
-    Fetches the latest Manchester United news.
+    Fetches the latest Manchester United news and formats it as a tweet.
     """
     api_key = os.getenv("NEWS_API_KEY")
     if not api_key:
@@ -32,7 +32,7 @@ def get_united_tweet() -> str:
         title = article.get("title", "No title available")
         article_url = article.get("url", "")
 
-        tweet = f"🚨 {title}\n🔗 Read more: {article_url}\n#MUFC #ManUtd"
+        tweet = f"🚨 {title}\n🔗 Read more: {article_url}"
         return tweet
 
     except Exception as e:
